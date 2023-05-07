@@ -1,0 +1,7 @@
+id,name,model_id/id,group_id/id,perm_read,perm_write,perm_create,perm_unlink
+access_estate,access_test,model_estate_property,base.group_user,1,1,1,1
+acl_estate_type_admin,estate_type_admin,model_estate_property_type,group_ag_managers,1,1,1,1
+acl_estate_tag_admin,estate_tag_admin,model_estate_property_tag,group_ag_managers,1,1,1,1
+acl_estate_buyer_admin,estate_buyer_admin,model_estate_buyer,group_ag_managers,1,1,1,1
+acl_estate_seller_admin,estate_seller_admin,model_estate_seller,group_ag_managers,1,1,1,1
+acl_estate_offer_admin,estate_offer_admin,model_estate_property_offer,group_ag_managers,1,1,1,1

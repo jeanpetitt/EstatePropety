@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <template id="estate_property">
+        <t t-foreach="docs" t-as="estate_property">
+            <t t-call="web.html_container">
+                
+                    <div class="page">
+                        <header style="margin-top: -20px">
+                            <img src="estate/static/image/logo"/>
+                            <h2 style="text-align: center; color:#448AFF;">Estate Property Facture</h2>
+                        </header>
+                        <div class="container">
+                            <div class="row" style="border: 1px solid gray">
+                                <p style="text-align:center; font-size:1.2rem;" t-field="estate_property.title"></p>
+                                <t t-set="tag_props" t-value="estate_property.mapped('tag_id')"/>
+                                <div t-foreach="tag_props" t-as="tag" style="text-align: center; margin-top: -5px">
+                                    <span t-field="tag.name" style="color: red;"></span>
+                                </div>
+                                <div class="col-md-6">
+                                    <table border="1" class="table" style="margin-left: 20px;">
+                                        <tbody>
+                                            <tr>
+                                                <td>
+                                                    <strong>Postcode </strong>
+                                                </td>
+                                                <td>
+                                                   <span style="margin-left: 600px;" t-field="estate_property.postcode"/> 
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <strong>Availability </strong>
+                                                </td>
+                                                <td>
+                                                    <span style="margin-left: 600px;" t-field="estate_property.selling_price"/>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <strong>Expected Price</strong>
+                                                </td>
+                                                <td>
+                                                    <span style="margin-left: 600px;" t-field="estate_property.expected_price"/>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <strong>Selling Price </strong>
+                                                </td>
+                                                <td>
+                                                    <span style="margin-left: 600px;" t-field="estate_property.best_price"/>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <strong>Best Price </strong>
+                                                </td>
+                                                <td>
+                                                    <span style="margin-left: 600px;" t-field="estate_property.best_price"/>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>                                
+                                </div>
+                                <div class="col-md-6">
+                                        <h3 style="text-align: center; color:#448AFF;">Description</h3>
+                                        <table class="table" style="margin-left: 20px;" border="1">
+                                            <tbody>
+                                                <tr>
+                                                    <td>
+                                                        <strong>About </strong><br/>
+                                                        <span t-field="estate_property.description"/>
+                                                    </td>
+                                                </tr>
+                                                    <td>
+                                                        <strong>Bedrooms </strong>
+                                                    </td>
+                                                    <td>
+                                                        <span style="margin-left: 600px;" t-field="estate_property.bedrooms"/>
+                                                    </td>
+                                                <tr>
+                                                    <td>
+                                                        <strong>Living Area </strong>
+                                                    </td>
+                                                    <td>
+                                                        <span style="margin-left: 600px;" t-field="estate_property.living_area"/>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <strong>Facades</strong>
+                                                    </td>
+                                                    <td>
+                                                        <span style="margin-left: 600px;" t-field="estate_property.facades"/>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <strong>Garage </strong>
+                                                    </td>
+                                                    <td>
+                                                        <span style="margin-left: 600px;" t-field="estate_property.garage"/>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <strong>Garden </strong>
+                                                    </td>
+                                                    <td>
+                                                        <span style="margin-left: 600px;" t-field="estate_property.garden"/>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <strong>Garden Area </strong>
+                                                    </td>
+                                                    <td>
+                                                        <span style="margin-left: 600px;" t-field="estate_property.garden_area"/>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>                                
+                                </div>
+                                <div class="col-md-6">
+                                        <h3 style="text-align: center; color:#448AFF;">Offer</h3>
+                                        <table class="table" style="margin-left: 20px;" border="1">
+                                            <tr>
+                                                <th>Price</th>
+                                                <th>Partner</th>
+                                                <th>Status</th>
+                                                <th>Validity (days)</th>
+                                                <th>Deadline</th>
+                                            </tr>
+                                            <tbody>
+                                                <t t-set="offers" t-value="estate_property.mapped('offer_ids')"/>
+                                                <tr t-foreach="offers" t-as="offer">
+                                                    <td>
+                                                        <span t-field="offer.price"/>
+                                                    </td>
+                                                    <td>
+                                                        <span t-field="offer.partener_id"/>
+                                                    </td>
+                                                    <td>
+                                                        <span t-field="offer.status"/>
+                                                    </td>
+                                                    <td>
+                                                        <span t-field="offer.validity"/>
+                                                    </td>
+                                                    <td>
+                                                        <span t-field="offer.date_deadline"/>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>                                
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                
+            </t>
+        </t>
+    </template>
+</odoo>

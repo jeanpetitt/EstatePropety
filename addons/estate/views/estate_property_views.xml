@@ -1,0 +1,617 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+<!-- =================== record to display windows ======================= -->
+    <!-- record for display estate property model -->
+    <record id="estate_model_action" model="ir.actions.act_window">
+        <field name="name">Properties</field>
+        <field name="res_model">estate.property</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- record to display estatet property types model -->
+    <record id="estate_agent_action" model="ir.actions.act_window">
+        <field name="name">Property Type</field>
+        <field name="res_model">estate.property.type</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+    <!-- estate property to display estate property tag model -->
+    <record id="estate_property_tag_action" model="ir.actions.act_window">
+        <field name="name">Property Tags</field>
+        <field name="res_model">estate.property.tag</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+    <!-- estate property to display buyer model -->
+    <record id="estate_buyer_action" model="ir.actions.act_window">
+        <field name="name">Buyer</field>
+        <field name="res_model">estate.buyer</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+    <!-- estate property to display buyer model -->
+    <record id="estate_seller_action" model="ir.actions.act_window">
+        <field name="name">Seller</field>
+        <field name="res_model">estate.seller</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+    <!-- estate property to display partener model -->
+    <!-- <record id="estate_partener_action" model="ir.actions.act_window">
+        <field name="name">Partener</field>
+        <field name="res_model">estate.partener</field>
+        <field name="view_mode">tree,form</field>
+    </record> -->
+    <!-- estate property to display buyer model -->
+    <record id="estate_offer_action" model="ir.actions.act_window">
+        <field name="name">Offer</field>
+        <field name="res_model">estate.property.offer</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+    
+<!-- =================== end record to display windows ======================= -->
+
+<!-- =================== Menu item to navigate in the different windows==================== -->
+    <menuitem id="estate_menu_root" name="Real Estate">
+        <menuitem id="estate_first_level_menu" name="Adverstisements">
+            <menuitem id="estate_model_menu_action" action="estate_model_action"/>
+        </menuitem>
+    </menuitem>
+    <!-- menu property type -->
+    <menuitem id="estate_second_level_menu" name="settings" parent="estate_menu_root">
+            <menuitem id="estate_type_menu_action" action="estate_agent_action"/>
+            <menuitem id="estate_tags_menu_action" action="estate_property_tag_action"/>
+    </menuitem>
+
+<!-- =================== EndMenuitem==================================================== -->
+
+
+<!--  =================Records top display on the View  ======================================= -->
+    <!-- ====== estate properety views -->
+    <record id="estate_view_form" model="ir.ui.view">
+        <field name="name">Property</field>
+        <field name="model">estate.property</field>
+        <field name="arch" type="xml">
+            <header>
+                <div style="color: green; margin-left: 70px; background-color:green;">
+                    <button name="solde" type="object">Solde</button>
+                </div>
+            </header>
+            <div class="container">
+                <form string="My New House" class="oe_form_field">
+                    <sheet>
+                        <div style="margin-bottom: 20px;">
+                            <field name="title" class="o_field_widget o_input" placeholder="Name Estate" style="space-between: center; font-size: 2.5rem; color: lightsteelblue;"/>
+                        </div>
+                        <div>
+                            <field name="tag_id" widget="many2many_tags"/>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <h5>Property Type</h5>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <field widget="selection" name="property_type_id" class="o_field_widget o_input" style="color: green;"/>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <h5>postcode</h5>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <field name="postcode" class="o_field_widget o_input"/>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <h5>Availability</h5>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <field name="date_availability" class="o_field_widget o_input"/>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="row">                    
+                                    <div class="col-sm-6">
+                                        <h5>Expected Price</h5>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <field name="expected_price" class="o_field_widget o_input"/>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <h5>Selling Price</h5>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <field name="selling_price" class="o_field_widget o_input"/>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <h5>Best offer</h5>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <field name="best_price" class="o_field_widget o_input"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <notebook>
+                            <page string="Description">
+                                <div class="container">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="row">                                            
+                                                <div class="col-md-6">
+                                                    <h5>Description</h5>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <field name="description"/>                                                
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <h5>Bedrooms</h5>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <field name="bedrooms"/>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <h5>Living Area</h5>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <field name="living_area"/>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <h5>Facades</h5>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <field name="facades"/>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <h5>Garage</h5>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <field name="garage" widget="boolean_button"/>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <h5>Garden</h5>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <field name="garden" widget="boolean_button"/>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <h5>Garden Area</h5>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <field name="garden_area"/>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <h5>Status</h5>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <field name="status" widget="selection"/>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <h5>Active</h5>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <field name="active" widget="boolean_button"/>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <h5>Total Area</h5>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <field name="total_area"/>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </page>
+                            <page string="Offer">
+                                <field name="offer_ids">
+                                    <tree>
+                                        <field name="price"/>
+                                        <field name="partener_id"/>
+                                        <field name="status" widget="statusbar" statusbar_visible="open,posted,confirm"/>
+                                        <field name="validity"/>
+                                        <field name="date_deadline"/>
+                                    </tree>
+                                </field>
+                            </page>
+                            <page string="Other infos">
+                                <div class="container">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <h4>Salesman</h4>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <field class="col-6" name="seller_id" style="color: green;"></field>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12" >
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <h4>Buyer</h4>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <field class="col-6" name="buyer_id" style="color: green;"></field>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </div>
+        </field>
+    </record>
+
+    <!-- estate properties view tree=========== -->
+    <record id="estate_view_tree" model="ir.ui.view">
+        <field name="name">MyHouseForm</field>
+        <field name="model">estate.property</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="title"/>
+                <field name="property_type_id"/>
+                <field name="active"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- search estate by name, description and postecode-->
+    <record id="estate_search" model="ir.ui.view">
+            <field name="name">estate estate</field>
+            <field name="model">estate.property</field>
+            <field name="arch" type="xml">
+                <search string="Search estate">
+                    <field name="title"/>
+                    <field name="postcode"/>
+                    <field name="date_availability"/>
+                    <field name="expected_price"/>
+                    <field name="selling_price"/>
+                    <field name="bedrooms"/>
+                    <field name="living_area"/>
+                    <field name="facades"/>
+                    <field name="property_type_id"/>
+                    <separator/>
+                    <filter string="Archived" name="inactive" domain="[('active', '=', False)]"/>
+                    <separator/>
+                    <group expand="1" string="Group By">
+                        <filter string="Provider" name="provider" context="{'group_by':'postcode', 'residual_visible':True}"/>
+                    </group>
+                </search>
+            </field>
+    </record>
+    <!-- ==== end estate property views========== -->
+
+    <!-- ===============estate property type view=========== -->  
+
+    <!-- estate properties type view form -->
+    <record id="estate_property_type_view_form" model="ir.ui.view">
+        <field name="name">Proprety Type</field>
+        <field name="model">estate.property.type</field>
+        <field name="arch" type="xml">
+            <form string="Property Type">
+                <sheet>
+                    <div>
+                        <field name="name" tabindex="-1" placeholder="Name Property" style="space-between: center; font-size: 2rem; color: green;"/>
+                    </div>
+                    <div style="margin-bottom: 30px; margin-top: 0px;"></div>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+     <!-- estate properties type view tree  -->
+    <record id="estate_property_type_view_tree" model="ir.ui.view">
+        <field name="name">Property Type Tree</field>
+        <field name="model">estate.property.type</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <!-- <field name="property_type_id"/> -->
+            </tree>
+        </field>
+    </record>
+
+    <!-- search property type by name-->
+    <record id="estate_property_type_view_search" model="ir.ui.view">
+            <field name="name">Property Type Search</field>
+            <field name="model">estate.property.type</field>
+            <field name="arch" type="xml">
+                <search string="Search property type">
+                    <field name="name"/>
+                    <separator/>
+                    <separator/>
+                    <group expand="1" string="Group By">
+                        <filter string="Type" name="type" context="{'group_by':'name', 'residual_visible':True}"/>
+                    </group>
+                </search>
+            </field>
+    </record>
+    <!-- ============end estateproperty type=============== -->
+
+
+    <!-- ===============estatepoperty tags view=========== -->
+    <!-- estate properties tag view form -->
+    <record id="estate_property_tags_view_form" model="ir.ui.view">
+        <field name="name">Proprety Tag</field>
+        <field name="model">estate.property.tag</field>
+        <field name="arch" type="xml">
+            <form string="Property Tag">
+                <sheet>
+                    <div>
+                        <field name="name" placeholder="Name Tag" style="space-between: center; font-size: 2rem; color: green;"/>
+                    </div>
+                    <div></div>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- estate properties tag view tree  -->
+    <record id="estate_property_tags_view_tree" model="ir.ui.view">
+        <field name="name">Property Tag Tree</field>
+        <field name="model">estate.property.tag</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- search property type by name-->
+    <record id="estate_property_tags_view_search" model="ir.ui.view">
+            <field name="name">Property Tags Search</field>
+            <field name="model">estate.property.tag</field>
+            <field name="arch" type="xml">
+                <search string="Search property tag">
+                    <field name="name"/>
+                    <separator/>
+                    <separator/>
+                    <group expand="1" string="Group By">
+                        <filter string="Property Tag" name="property tag" context="{'group_by':'name', 'residual_visible':True}"/>
+                    </group>
+                </search>
+            </field>
+    </record>
+    <!-- ============end estateproperty tags=============== -->
+
+    <!-- ===============estatepoperty Buyer view=========== -->
+    <!-- estate Buyer -->
+    <record id="estate_buyer_view_form" model="ir.ui.view">
+        <field name="name">Buyer</field>
+        <field name="model">estate.buyer</field>
+        <field name="arch" type="xml">
+            <form string="Buyer">
+                <sheet>
+                    <div>
+                        <field name="name" placeholder="Name Tag" style="space-between: center; font-size: 2rem; color: green;"/>
+                    </div>
+                    <div></div>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <!-- estate Buyer view tree  -->
+    <record id="estate_buyers_view_tree" model="ir.ui.view">
+        <field name="name">Buyer</field>
+        <field name="model">estate.buyer</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+            </tree>
+        </field>
+    </record>
+    <!-- search estate buyer-->
+    <record id="estate_buyer_view_search" model="ir.ui.view">
+            <field name="name">Buyer Search</field>
+            <field name="model">estate.buyer</field>
+            <field name="arch" type="xml">
+                <search string="Search buyer">
+                    <field name="name"/>
+                    <separator/>
+                    <separator/>
+                    <group expand="1" string="Group By">
+                        <filter string="Buyer" name="buyer" context="{'group_by':'name', 'residual_visible':True}"/>
+                    </group>
+                </search>
+            </field>
+    </record>
+    <!-- ============end estate Buyer=============== -->
+
+    <!-- ===============estatepoperty seller view=========== -->
+    <!-- estate Seller -->
+    <record id="estate_seller_view_form" model="ir.ui.view">
+        <field name="name">Buyer</field>
+        <field name="model">estate.seller</field>
+        <field name="arch" type="xml">
+            <form string="Seller">
+                <sheet>
+                    <div>
+                        <field name="name" placeholder="Name Tag" style="space-between: center; font-size: 2rem; color: green;"/>
+                    </div>
+                    <div></div>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <!-- estate Seller view tree  -->
+    <record id="estate_seller_view_tree" model="ir.ui.view">
+        <field name="name">Seller</field>
+        <field name="model">estate.seller</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+            </tree>
+        </field>
+    </record>
+    <!-- search estate seller-->
+    <record id="estate_seller_view_search" model="ir.ui.view">
+            <field name="name">Seller Search</field>
+            <field name="model">estate.seller</field>
+            <field name="arch" type="xml">
+                <search string="Search seller">
+                    <field name="name"/>
+                    <separator/>
+                    <separator/>
+                    <group expand="1" string="Group By">
+                        <filter string="Seller" name="seller" context="{'group_by':'name', 'residual_visible':True}"/>
+                    </group>
+                </search>
+            </field>
+    </record>
+    <!-- ============end estate Buyer=============== -->
+
+    <!-- ============estate Offer=============== -->
+
+    <record id="estate_offer_view_form" model="ir.ui.view">
+        <field name="name">Offer</field>
+        <field name="model">estate.property.offer</field>
+        <field name="arch" type="xml">
+            <form string="Offer">
+                <sheet>
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-12" >
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <h4>Price</h4>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <field class="o_field_widget o_input" name="price"/>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-12" >
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <h4>Partener</h4>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <field class="o_field_widget o_input" name="partener_id"/>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-12" >
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <h4>Status</h4>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <field class="o_field_widget o_input" name="status"/>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-12" >
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <h4>Validity</h4>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <field class="o_field_widget o_input" name="validity"/>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-12" >
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <h4>Dealine</h4>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <field class="o_field_widget o_input" name="date_deadline"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>  
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="estate_offer_view_tree" model="ir.ui.view">
+        <field name="name">Offer</field>
+        <field name="model">estate.property.offer</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="price"/>
+                <field name="partener_id"/>
+                <field name="status"/>
+                <field name="validity"/>
+                <field name="date_deadline"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="estate_offer_view_search" model="ir.ui.view">
+            <field name="name">Offer Search</field>
+            <field name="model">estate.property.offer</field>
+            <field name="arch" type="xml">
+                <search string="Search Offer">
+                    <field name="price"/>
+                    <field name="status"/>
+                    <separator/>
+                    <separator/>
+                    <group expand="1" string="Group By">
+                        <filter string="Seller" name="seller" context="{'group_by':'status', 'residual_visible':True}"/>
+                    </group>
+                </search>
+            </field>
+    </record>
+
+    <!-- ============end estate offer=============== -->
+
+    <!-- =========== ENDVIEW RECORD -->
+</odoo>

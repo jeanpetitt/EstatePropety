@@ -1,0 +1,27 @@
+version: '3.7'
+
+services:
+  web:
+    image: odoo:16
+    depends_on:
+      - postdb1
+    ports:
+      - "8089:8069"
+    volumes:
+      - odoo-web-data:/var/lib/odoo
+      - ./config:/etc/odoo
+      - ./addons:/mnt/extra-addons
+  postdb1:
+    image: postgres:15
+    restart: always
+    environment:
+      - POSTGRES_PASSWORD=odoo
+      - POSTGRES_USER=odoo
+      - PGDATA=/var/lib/postgresql/data/pgdata
+    ports:
+      - '7083:5432'
+    volumes:
+      - odoo-db-data:/var/lib/postgresql/data/pgdata
+volumes:
+  odoo-web-data:
+  odoo-db-data:
